@@ -13,11 +13,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Lançador de Moedas")
+            Text("Krark's Coin Tosser - Beta")
                 .font(.largeTitle)
                 .padding(.top)
             
-            TextField("Quantas moedas serão lançadas?", text: $numberOfCoins)
+            TextField("Quantas moedas(triggers do Krark) serão lançadas?", text: $numberOfCoins)
                 .keyboardType(.numberPad)
                 .padding()
                 .background(Color(.secondarySystemBackground))
