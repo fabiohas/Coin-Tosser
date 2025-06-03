@@ -13,11 +13,11 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 20) {
-            Text("Krark's Coin Tosser - Beta")
+            Text("Krarkashima Coin Tosser")
                 .font(.largeTitle)
                 .padding(.top)
             
-            TextField("Quantas moedas(triggers do Krark) serão lançadas?", text: $numberOfCoins)
+            TextField("Quantas moedas?", text: $numberOfCoins)
                 .keyboardType(.numberPad)
                 .padding()
                 .background(Color(.secondarySystemBackground))
@@ -27,6 +27,7 @@ struct ContentView: View {
             HStack {
                 Button("Lançar Moedas") {
                     launchCoins()
+                    hideKeyboard()
                 }
                 .padding()
                 .background(Color.blue)
@@ -37,6 +38,7 @@ struct ContentView: View {
                     numberOfCoins = ""
                     results = []
                     historico = []
+                    hideKeyboard()
                 }
                 .padding()
                 .background(Color.red)
@@ -74,7 +76,7 @@ struct ContentView: View {
                                     .font(.caption)
                                     .foregroundColor(.secondary)
                                 Text("Caras: \(caras), Coroas: \(coroas)")
-                                Text("Lançamentos: \(lancamento.resultados.map { $0 == "Cara" ? "🙂 Cara" : "👑 Coroa" }.joined(separator: ", "))")
+                                Text("Lançamentos: \(lancamento.resultados.map { $0 == "Cara" ? "🙂" : "👑" }.joined(separator: " "))")
                                     .font(.caption)
                                     .foregroundColor(.gray)
                             }
@@ -108,3 +110,10 @@ struct ContentView: View {
     }
 }
 
+// 👉 Extensão para esconder o teclado
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder),
+                                        to: nil, from: nil, for: nil)
+    }
+}
